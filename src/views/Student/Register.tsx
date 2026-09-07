@@ -7,7 +7,9 @@ export default function StudentRegister() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (name.trim()) {
-      setResult(name.trim());
+      const registeredName = name.trim();
+      localStorage.setItem("registeredStudent", registeredName);
+      setResult(registeredName);
     }
   };
 
@@ -47,7 +49,11 @@ export default function StudentRegister() {
         <div style={{ marginTop: "16px" }}>
           <p>Registered student: {result}</p>
           <button
-            onClick={() => { setResult(null); setName(""); }}
+            onClick={() => {
+              localStorage.removeItem("registeredStudent");
+              setResult(null);
+              setName("");
+            }}
             style={{
               marginTop: "12px",
               padding: "7px 20px",
